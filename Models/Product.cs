@@ -11,6 +11,8 @@ public class Product
         Category = category;
         Price = price;
     }
+
+    Product() {   }
     
     public int Id { get; set; }
     public string? Name { get; set; }

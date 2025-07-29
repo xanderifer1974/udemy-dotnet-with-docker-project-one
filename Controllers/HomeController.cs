@@ -1,31 +1,30 @@
-﻿using System.Diagnostics;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using mvc_com_docker.Models;
 
 namespace mvc_com_docker.Controllers;
 
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly IHttpContextAccessor _httpContextAccessor;
+    private readonly IRepositoryProduct _repositoryProduct;
+    private string message;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(IRepositoryProduct repositoryProduct, 
+                          IHttpContextAccessor httpContextAccessor, 
+                          ILogger<HomeController> logger)
     {
-        _logger = logger;
-    }
-
+        _repositoryProduct = repositoryProduct;
+        _httpContextAccessor = httpContextAccessor;
+        var hostname = _httpContextAccessor.HttpContext?.Request.Host.Value;
+        message = $"Docker - ({hostname}) - ASP.NET Core MVC with Docker";
+       
+    }   
+    
     public IActionResult Index()
     {
-        return View();
-    }
+        ViewBag.Message = message;
 
-    public IActionResult Privacy()
-    {
-        return View();
+        return View(_repositoryProduct.GetAll());
     }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-    }
+    
 }
