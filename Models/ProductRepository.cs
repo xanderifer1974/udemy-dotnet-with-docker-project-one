@@ -4,12 +4,19 @@ namespace mvc_com_docker.Models;
 
 public class ProductRepository: IRepositoryProduct
 {
-    private List<Product> products = new List<Product>
+
+    private AppDbContext context;
+    public ProductRepository(AppDbContext context)
     {
-        new Product(1, "Product A", "Category 1", 10.99m),
-        new Product(2, "Product B", "Category 2", 20.99m),
-        new Product(3, "Product C", "Category 1", 30.99m)
-    };
+        this.context = context;
+    }
+    public IEnumerable<Product> products
+    {
+        get
+        {
+            return context.Products.ToList();
+        }
+    }   
 
     public IEnumerable<Product> GetAll()
     {
