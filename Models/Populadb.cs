@@ -19,7 +19,9 @@ namespace mvc_com_docker.Models
                     new Product { Name = "Luvas de goleiro", Price = 25, Category = "Futebol" },
                     new Product { Name = "Bola de basquete", Price = 49.95M, Category = "Basquete" },
                     new Product { Name = "Bola de Futebol", Price = 30.0M, Category = "Futebol" },
+                    new Product { Name = "Óculos de natação", Price = 50, Category = "Aquáticos" },
                     new Product { Name = "Meias Grandes", Price = 50, Category = "Futebol" },
+                    new Product { Name = "Calção de banho", Price = 50, Category = "Aquáticos" },
                     new Product { Name = "Cesta para quadra", Price = 29.95M, Category = "Basquete" }
                 );
                 context.SaveChanges();

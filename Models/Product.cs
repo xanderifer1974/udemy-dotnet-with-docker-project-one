@@ -1,5 +1,3 @@
-using System;
-
 namespace mvc_com_docker.Models;
 
 public class Product
@@ -10,6 +8,20 @@ public class Product
         Name = name;
         Category = category;
         Price = price;
+    }
+
+    public Product(string name, string category, string price)
+    {
+        this.Name = name;
+        this.Category = category;
+        if (decimal.TryParse(price, out decimal parsedPrice))
+        {
+            this.Price = parsedPrice;
+        }
+        else
+        {
+            throw new ArgumentException("Invalid price format");
+        }
     }
 
     public Product() {   }
