@@ -21,8 +21,10 @@ builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddScoped<IRepositoryProduct, ProductRepository>();
 
 
+
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 30))));
+    options.UseMySql(connectionString, new MySqlServerVersion(new Version(5, 7, 0))));
+
 
 
 var app = builder.Build();

@@ -14,17 +14,17 @@ public class HomeController : Controller
                           ILogger<HomeController> logger)
     {
         _repositoryProduct = repositoryProduct;
-        _httpContextAccessor = httpContextAccessor;
-        var hostname = _httpContextAccessor.HttpContext?.Request.Host.Value;
-        message = $"Docker - ({hostname}) - ASP.NET Core MVC with Docker";
+        _httpContextAccessor = httpContextAccessor;      
        
-    }   
-    
+       
+    }
+
     public IActionResult Index()
     {
-        ViewBag.Message = message;
-
+        var hostname = _httpContextAccessor.HttpContext?.Request.Host.Value;
+        ViewBag.Hostname = hostname;
+        ViewBag.Message = $"Docker - ({hostname}) - ASP.NET Core MVC with Docker";
         return View(_repositoryProduct.GetAll());
     }
-    
+
 }
